@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h4 class="text-danger text-center my-5">Create Company</h4>
+        <h4 class="text-danger text-center my-5">Edit Company</h4>
 
         <div class="col-8 offset-2">
-            <form action="{{ route('company.update',$company->id) }}" enctype="multipart/form-data">
+            <form action="{{ route('company.update',$company->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
 

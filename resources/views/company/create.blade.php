@@ -20,12 +20,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="logo"> Comany Logo </label>
+                    <label for="logo"> Comany Logo <span class="text-danger">*</span></label>
                     <input type="file" id="logo" name="logo" class="form-control">
                 </div>
 
                 <div class="mb-3">
-                    <label for="website"> Company Website </label>
+                    <label for="website"> Company Website <span class="text-danger">*</span></label>
                     <input type="text" id="website" name="website" class="form-control"
                         placeholder="Enter website address">
                 </div>

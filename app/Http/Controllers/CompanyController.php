@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use App\Models\Employee;
 
 class CompanyController extends Controller
 {
@@ -83,19 +84,14 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        // Validate the request using the UpdateCompanyRequest rules
+
         $validated = $request->validated();
 
-        // Check if a new logo file was uploaded
         if ($request->hasFile('logo')) {
 
-            if($company->logo != null) {
-                Storage::delete("public/comany/$company->logo");
-            }
-            // Generate a unique filename for the new logo
-            $fileName = uniqid() . $request->file('logo')->getClientOriginalName();
+            Storage::delete("public/comany/$company->logo");
 
-            // Store the new logo file and update the company's logo field
+            $fileName = uniqid() . $request->file('logo')->getClientOriginalName();
             $request->file('logo')->storeAs('public/company', $fileName);
             $company->logo = $fileName;
         }
@@ -115,8 +111,9 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        return back()->with('success', 'Company deleted successfully');
     }
 }
